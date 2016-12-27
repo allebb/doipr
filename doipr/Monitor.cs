@@ -26,6 +26,11 @@ namespace doipr
         private int interval = 30000;
 
         /// <summary>
+        /// The last known public address.
+        /// </summary>
+        private string lastAddress;
+
+        /// <summary>
         /// An instance of the IP Monitor class.
         /// </summary>
         protected IpMonitor publicAddress = new IpMonitor();
@@ -65,28 +70,41 @@ namespace doipr
         /// </summary>
         private void monitor()
         {
-            this.ticker();
+            this.process();
             Thread.Sleep(this.interval);
         }
 
         /// <summary>
         /// Worker invoker
         /// </summary>
-        private void ticker()
+        private void process()
         {
-            if (this.running)
-            {
-                this.publicAddress.detect();
+            if (!this.running)
+                return;
 
-                if (this.publicAddress.compare("127.0.0.1"))
-                {
-                    string text = "IP Address, still the same: " + this.publicAddress.get() + System.Environment.NewLine;
-                    File.AppendAllText(@"C:\Users\Public\WriteText.txt", text);
-                }
-                else
-                {
-                    Logger.PushMessage("Test", "New IP address detected (" + publicAddress.get() + "), updating the DigitalOcean API.");
-                }              
+            // Resolve the current public IP address.
+            this.publicAddress.detect();
+
+            // Update and trigger a DO API request if the address has since changed.
+            if (!this.publicAddress.compare(this.lastAddress))
+            {
+                this.lastAddress = this.publicAddress.get();
+                Logger.PushMessage("Test", "New IP address detected (" + publicAddress.get() + "), updating the DigitalOcean API.");
+
+                // Invoke an DigitalOcean DNS Update.
+                this.pushIpUpdateToDigitalOcean(this.lastAddress);
+            }
+        }
+
+        /// <summary>
+        /// Push DNS updates to a DigtalOcean DNS record.
+        /// </summary>
+        /// <param name="ipAddress"></param>
+        protected void pushIpUpdateToDigitalOcean(string ipAddress)
+        {
+            if (!true)
+            {
+                Logger.PushMessage("Test", "Unable to update DigitalOcean API - Check your API credentials and try again!");
             }
         }
     }
