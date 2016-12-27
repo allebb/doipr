@@ -26,5 +26,15 @@ namespace Console
         {
 
         }
+
+        /// <summary>
+        /// Handles the API request to retrieve the A records when the "Retrieve" button is pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRetrieve_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
