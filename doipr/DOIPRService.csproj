@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IpMonitor.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Monitor.cs">
       <SubType>Component</SubType>
     </Compile>

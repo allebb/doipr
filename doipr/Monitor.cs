@@ -66,7 +66,7 @@ namespace doipr
         private void monitor()
         {
             this.ticker();
-            Thread.Sleep(this.interval);  
+            Thread.Sleep(this.interval);
         }
 
         /// <summary>
@@ -77,9 +77,16 @@ namespace doipr
             if (this.running)
             {
                 this.publicAddress.detect();
-           
-                string text = "IP Address: " + this.publicAddress.get() + System.Environment.NewLine;
-                File.AppendAllText(@"C:\Users\Public\WriteText.txt", text);
+
+                if (this.publicAddress.compare("127.0.0.1"))
+                {
+                    string text = "IP Address, still the same: " + this.publicAddress.get() + System.Environment.NewLine;
+                    File.AppendAllText(@"C:\Users\Public\WriteText.txt", text);
+                }
+                else
+                {
+                    Logger.PushMessage("Test", "New IP address detected (" + publicAddress.get() + "), updating the DigitalOcean API.");
+                }              
             }
         }
     }
