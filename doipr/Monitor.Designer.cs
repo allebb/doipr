@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            this.components = new System.ComponentModel.Container();
+            this.ServiceName = "DigitalOcean IP Update Client";
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer intvlMonitor;
     }
 }
