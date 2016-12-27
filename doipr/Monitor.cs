@@ -26,6 +26,11 @@ namespace doipr
         private int interval = 30000;
 
         /// <summary>
+        /// An instance of the IP Monitor class.
+        /// </summary>
+        protected IpMonitor publicAddress = new IpMonitor();
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public Monitor()
@@ -71,7 +76,9 @@ namespace doipr
         {
             if (this.running)
             {
-                string text = "A line of text" + System.Environment.NewLine;
+                this.publicAddress.detect();
+           
+                string text = "IP Address: " + this.publicAddress.get() + System.Environment.NewLine;
                 File.AppendAllText(@"C:\Users\Public\WriteText.txt", text);
             }
         }
