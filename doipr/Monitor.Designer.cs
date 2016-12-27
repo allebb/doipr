@@ -1,6 +1,6 @@
 ﻿namespace doipr
 {
-    partial class Service1
+    partial class Monitor
     {
         /// <summary> 
         /// Required designer variable.

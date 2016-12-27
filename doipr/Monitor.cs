@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace doipr
 {
-    public partial class Service1 : ServiceBase
+    public partial class Monitor : ServiceBase
     {
-        public Service1()
+        public Monitor()
         {
             InitializeComponent();
         }
