@@ -8,11 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DOIPR.Service;
+using System.ServiceProcess;
+
 
 namespace Console
 {
     public partial class ConsoleForm : Form
     {
+
+        private const string SERVICENAME = "DigitalOcean IP Update Client";
+
         public ConsoleForm()
         {
             InitializeComponent();
@@ -46,7 +51,7 @@ namespace Console
         {
             this.txtQueryInterval.Text = DOIPR.Service.Properties.Settings.Default.queryInterval.ToString();
             this.txtLastUpdatedAt.Text = DOIPR.Service.Properties.Settings.Default.queryLast.ToString();
-            this.txtServiceStatus.Text = "Stopped!";
+            this.txtServiceStatus.Text = this.getServiceStatus();
             this.txtToken.Text = DOIPR.Service.Properties.Settings.Default.token.ToString();
             this.txtDomain.Text = DOIPR.Service.Properties.Settings.Default.domain.ToString();
         }
@@ -56,11 +61,36 @@ namespace Console
         /// </summary>
         private void saveConsoleSettings()
         {
-            DOIPR.Service.Properties.Settings.Default.queryInterval = this.txtQueryInterval.Text;
+            DOIPR.Service.Properties.Settings.Default.queryInterval = Convert.ToInt32(txtQueryInterval.ToString());
             DOIPR.Service.Properties.Settings.Default.queryLast = this.txtLastUpdatedAt.Text;
-            DOIPR.Service.Properties.Settings.token = this.txtToken.Text;
-            DOIPR.Service.Properties.Settings.domain = this.txtDomain.Text;
-            DOIPR.Service.Properties.Settings.Save();
+            DOIPR.Service.Properties.Settings.Default.token = this.txtToken.Text;
+            DOIPR.Service.Properties.Settings.Default.domain = this.txtDomain.Text;
+            DOIPR.Service.Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Retrieves the current service status.
+        /// </summary>
+        /// <returns></returns>
+        private string getServiceStatus()
+        {
+            ServiceController sc = new ServiceController(this.SERVICENAME);
+
+            switch (sc.Status)
+            {
+                case ServiceControllerStatus.Running:
+                    return "Running...";
+                case ServiceControllerStatus.Stopped:
+                    return "Stopped!";
+                case ServiceControllerStatus.Paused:
+                    return "Paused";
+                case ServiceControllerStatus.StopPending:
+                    return "Stopping...";
+                case ServiceControllerStatus.StartPending:
+                    return "Starting...";
+                default:
+                    return "Status Changing";
+            }
         }
     }
 }
