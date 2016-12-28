@@ -16,7 +16,7 @@ namespace Console
     public partial class ConsoleForm : Form
     {
 
-        private const string SERVICENAME = "DigitalOcean IP Update Client";
+        const string SERVICENAME = "DigitalOcean IP Update Client";
 
         public ConsoleForm()
         {
@@ -41,7 +41,7 @@ namespace Console
         /// <param name="e"></param>
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace Console
         /// </summary>
         private void loadConsoleSettings()
         {
-            this.txtQueryInterval.Text = DOIPR.Service.Properties.Settings.Default.queryInterval.ToString();
-            this.txtLastUpdatedAt.Text = DOIPR.Service.Properties.Settings.Default.queryLast.ToString();
-            this.txtServiceStatus.Text = this.getServiceStatus();
+            this.txtQueryInterval.Text = (DOIPR.Service.Properties.Settings.Default.queryInterval / 1000 / 60).ToString();
+            //this.txtLastUpdatedAt.Text = DOIPR.Service.Properties.Settings.Default.queryLast.ToString();
+            //this.txtServiceStatus.Text = this.getServiceStatus();
             this.txtToken.Text = DOIPR.Service.Properties.Settings.Default.token.ToString();
             this.txtDomain.Text = DOIPR.Service.Properties.Settings.Default.domain.ToString();
         }
@@ -61,11 +61,14 @@ namespace Console
         /// </summary>
         private void saveConsoleSettings()
         {
-            DOIPR.Service.Properties.Settings.Default.queryInterval = Convert.ToInt32(txtQueryInterval.ToString());
+            DOIPR.Service.Properties.Settings.Default.queryInterval = Convert.ToInt32(txtQueryInterval.Text);
             DOIPR.Service.Properties.Settings.Default.queryLast = this.txtLastUpdatedAt.Text;
             DOIPR.Service.Properties.Settings.Default.token = this.txtToken.Text;
             DOIPR.Service.Properties.Settings.Default.domain = this.txtDomain.Text;
             DOIPR.Service.Properties.Settings.Default.Save();
+
+            MessageBox.Show("Your settings have been saved successfully!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         /// <summary>
@@ -74,7 +77,7 @@ namespace Console
         /// <returns></returns>
         private string getServiceStatus()
         {
-            ServiceController sc = new ServiceController(this.SERVICENAME);
+            ServiceController sc = new ServiceController(SERVICENAME);
 
             switch (sc.Status)
             {

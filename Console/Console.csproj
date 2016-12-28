@@ -82,7 +82,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\doipr\Service.csproj">
+    <ProjectReference Include="..\Service\Service.csproj">
       <Project>{ce282cb8-656f-4028-82f7-b67335948bf1}</Project>
       <Name>Service</Name>
     </ProjectReference>

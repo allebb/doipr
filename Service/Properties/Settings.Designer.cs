@@ -38,7 +38,7 @@ namespace DOIPR.Service.Properties
             }
             set
             {
-                queryInterval = value;
+                this["queryInterval"] = value;
             }
         }
 
@@ -53,7 +53,7 @@ namespace DOIPR.Service.Properties
             }
             set
             {
-                currentAddress = value;
+                this["currentAddress"] = value;
             }
         }
 
@@ -68,7 +68,7 @@ namespace DOIPR.Service.Properties
             }
             set
             {
-                token = value;
+                this["token"] = value;
             }
         }
 
@@ -83,7 +83,7 @@ namespace DOIPR.Service.Properties
             }
             set
             {
-                domain = value;
+                this["domain"] = value;
             }
         }
 
@@ -98,7 +98,7 @@ namespace DOIPR.Service.Properties
             }
             set
             {
-                recordName = value;
+                this["recordName"] = value;
             }
         }
 
@@ -128,7 +128,7 @@ namespace DOIPR.Service.Properties
             }
             set
             {
-                queryLast = value;
+                this["queryLast"] = value;
             }
         }
     }
