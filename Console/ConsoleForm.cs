@@ -15,6 +15,7 @@ namespace Console
         public ConsoleForm()
         {
             InitializeComponent();
+            this.loadConsoleSettings();
         }
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace Console
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            this.saveConsoleSettings();
         }
 
         /// <summary>
@@ -34,7 +35,31 @@ namespace Console
         /// <param name="e"></param>
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
+            
+        }
 
+        /// <summary>
+        /// Load the application settings to populate the Console form.
+        /// </summary>
+        private void loadConsoleSettings()
+        {
+            this.txtQueryInterval.Text = Properties.Settings.Default.queryInterval.ToString();
+            this.txtLastUpdatedAt.Text = Properties.Settings.Default.queryLast.ToString();
+            this.txtServiceStatus.Text = "Stopped!";
+            this.txtToken.Text = Properties.Settings.Default.token.ToString();
+            this.txtDomain.Text = Properties.Settings.Default.domain.ToString();
+        }
+
+        /// <summary>
+        /// Saves the application settings.
+        /// </summary>
+        private void saveConsoleSettings()
+        {
+            doipr.Properties.Settings.Default.queryInterval = this.txtQueryInterval.Text;
+            Properties.Settings.Default.queryLast = this.txtLastUpdatedAt.Text;
+            Properties.Settings.Default.token = this.txtToken.Text;
+            Properties.Settings.Default.domain = this.txtDomain.Text;
+            Properties.Settings.Default.Save();
         }
     }
 }
