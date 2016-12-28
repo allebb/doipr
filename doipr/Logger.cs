@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace doipr
+namespace DOIPR.Service
 {
     public static class Logger
     {

@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace doipr
+namespace DOIPR.Service
 {
     public partial class Monitor : ServiceBase
     {

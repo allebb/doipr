@@ -1,4 +1,4 @@
-﻿namespace doipr
+﻿namespace DOIPR.Service
 {
     partial class Monitor
     {

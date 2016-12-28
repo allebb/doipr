@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DOIPR.Service;
 
 namespace Console
 {
@@ -43,11 +44,11 @@ namespace Console
         /// </summary>
         private void loadConsoleSettings()
         {
-            this.txtQueryInterval.Text = Properties.Settings.Default.queryInterval.ToString();
-            this.txtLastUpdatedAt.Text = Properties.Settings.Default.queryLast.ToString();
+            this.txtQueryInterval.Text = DOIPR.Service.Properties.Settings.Default.queryInterval.ToString();
+            this.txtLastUpdatedAt.Text = DOIPR.Service.Properties.Settings.Default.queryLast.ToString();
             this.txtServiceStatus.Text = "Stopped!";
-            this.txtToken.Text = Properties.Settings.Default.token.ToString();
-            this.txtDomain.Text = Properties.Settings.Default.domain.ToString();
+            this.txtToken.Text = DOIPR.Service.Properties.Settings.Default.token.ToString();
+            this.txtDomain.Text = DOIPR.Service.Properties.Settings.Default.domain.ToString();
         }
 
         /// <summary>
@@ -55,11 +56,11 @@ namespace Console
         /// </summary>
         private void saveConsoleSettings()
         {
-            doipr.Properties.Settings.Default.queryInterval = this.txtQueryInterval.Text;
-            Properties.Settings.Default.queryLast = this.txtLastUpdatedAt.Text;
-            Properties.Settings.Default.token = this.txtToken.Text;
-            Properties.Settings.Default.domain = this.txtDomain.Text;
-            Properties.Settings.Default.Save();
+            DOIPR.Service.Properties.Settings.Default.queryInterval = this.txtQueryInterval.Text;
+            DOIPR.Service.Properties.Settings.Default.queryLast = this.txtLastUpdatedAt.Text;
+            DOIPR.Service.Properties.Settings.Default.token = this.txtToken.Text;
+            DOIPR.Service.Properties.Settings.Default.domain = this.txtDomain.Text;
+            DOIPR.Service.Properties.Settings.Default.Save();
         }
     }
 }
