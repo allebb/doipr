@@ -8,81 +8,127 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DOIPR.Service.Properties {
-    
-    
+namespace DOIPR.Service.Properties
+{
+
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
-        public static Settings Default {
-            get {
+
+        public static Settings Default
+        {
+            get
+            {
                 return defaultInstance;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30000")]
-        public int queryInterval {
-            get {
+        public int queryInterval
+        {
+            get
+            {
                 return ((int)(this["queryInterval"]));
             }
+            set
+            {
+                queryInterval = value;
+            }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
-        public string currentAddress {
-            get {
+        public string currentAddress
+        {
+            get
+            {
                 return ((string)(this["currentAddress"]));
             }
+            set
+            {
+                currentAddress = value;
+            }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string token {
-            get {
+        public string token
+        {
+            get
+            {
                 return ((string)(this["token"]));
             }
+            set
+            {
+                token = value;
+            }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string domain {
-            get {
+        public string domain
+        {
+            get
+            {
                 return ((string)(this["domain"]));
             }
+            set
+            {
+                domain = value;
+            }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string recordName {
-            get {
+        public string recordName
+        {
+            get
+            {
                 return ((string)(this["recordName"]));
             }
+            set
+            {
+                recordName = value;
+            }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public ulong recordId {
-            get {
+        public ulong recordId
+        {
+            get
+            {
                 return ((ulong)(this["recordId"]));
             }
+            set
+            {
+                recordId = value;
+            }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string queryLast {
-            get {
+        public string queryLast
+        {
+            get
+            {
                 return ((string)(this["queryLast"]));
+            }
+            set
+            {
+                queryLast = value;
             }
         }
     }

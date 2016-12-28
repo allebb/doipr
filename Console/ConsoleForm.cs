@@ -58,9 +58,9 @@ namespace Console
         {
             DOIPR.Service.Properties.Settings.Default.queryInterval = this.txtQueryInterval.Text;
             DOIPR.Service.Properties.Settings.Default.queryLast = this.txtLastUpdatedAt.Text;
-            DOIPR.Service.Properties.Settings.Default.token = this.txtToken.Text;
-            DOIPR.Service.Properties.Settings.Default.domain = this.txtDomain.Text;
-            DOIPR.Service.Properties.Settings.Default.Save();
+            DOIPR.Service.Properties.Settings.token = this.txtToken.Text;
+            DOIPR.Service.Properties.Settings.domain = this.txtDomain.Text;
+            DOIPR.Service.Properties.Settings.Save();
         }
     }
 }
