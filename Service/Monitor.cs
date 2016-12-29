@@ -42,6 +42,9 @@ namespace DOIPR.Service
         {
             InitializeComponent();
 
+            DOAPI doer = new DOAPI("be1a82ce26040ec95aab7ab6ec8fcf9c8e63f4405325173e42de06e25ca2bb8b");
+            doer.retrieveRecords("alln.uk");
+
             while (true)
             {
                 this.monitor();
@@ -79,6 +82,7 @@ namespace DOIPR.Service
         /// </summary>
         private void process()
         {
+
             if (!this.running)
                 return;
 
@@ -86,9 +90,8 @@ namespace DOIPR.Service
             this.publicAddress.detect();
 
             // Update and trigger a DO API request if the address has since changed.
-            if (!this.publicAddress.compare(this.lastAddress))
+            if (!this.publicAddress.compare(Properties.Settings.Default.currentAddress))
             {
-                this.lastAddress = this.publicAddress.get();
                 Logger.PushMessage("Test", "New IP address detected (" + publicAddress.get() + "), updating the DigitalOcean API.");
 
                 // Invoke an DigitalOcean DNS Update.
@@ -105,7 +108,10 @@ namespace DOIPR.Service
             if (!true)
             {
                 Logger.PushMessage("Test", "Unable to update DigitalOcean API - Check your API credentials and try again!");
+                return;
             }
+            Properties.Settings.Default.currentAddress = ipAddress;
+            Properties.Settings.Default.Save();
         }
     }
 }

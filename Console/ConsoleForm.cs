@@ -41,6 +41,38 @@ namespace Console
         /// <param name="e"></param>
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
+            DOAPI api = new DOAPI(DOIPR.Service.Properties.Settings.Default.token);
+            this.btnRetrieve.Enabled = false;
+            this.btnRetrieve.Text = "Working...";
+            this.btnRetrieve.Refresh();
+
+            try
+            {
+                DomainRecords data = api.retrieveRecords(this.txtDomain.Text.ToString());
+
+                if (data.domain_records.Count() == 0)
+                {
+                    MessageBox.Show("There are no \"A\" records for this domain!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.cbxUpdate.Enabled = true;
+                foreach (Record record in data.domain_records)
+                {
+                    if (record.type != "A")
+                        continue;
+                    this.cbxUpdate.Items.Add(record);
+                }
+                
+            }
+            catch (System.Net.WebException execption)
+            {
+                MessageBox.Show("An error occured, check your DigitalOcean token and connection and try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.Enabled = true;
+            this.btnRetrieve.Refresh();
 
         }
 
@@ -52,6 +84,7 @@ namespace Console
             this.txtQueryInterval.Text = (DOIPR.Service.Properties.Settings.Default.queryInterval / 1000 / 60).ToString();
             //this.txtLastUpdatedAt.Text = DOIPR.Service.Properties.Settings.Default.queryLast.ToString();
             //this.txtServiceStatus.Text = this.getServiceStatus();
+            this.txtCurrentAddress.Text = DOIPR.Service.Properties.Settings.Default.currentAddress.ToString();
             this.txtToken.Text = DOIPR.Service.Properties.Settings.Default.token.ToString();
             this.txtDomain.Text = DOIPR.Service.Properties.Settings.Default.domain.ToString();
         }
@@ -62,11 +95,9 @@ namespace Console
         private void saveConsoleSettings()
         {
             DOIPR.Service.Properties.Settings.Default.queryInterval = Convert.ToInt32(txtQueryInterval.Text);
-            DOIPR.Service.Properties.Settings.Default.queryLast = this.txtLastUpdatedAt.Text;
             DOIPR.Service.Properties.Settings.Default.token = this.txtToken.Text;
             DOIPR.Service.Properties.Settings.Default.domain = this.txtDomain.Text;
             DOIPR.Service.Properties.Settings.Default.Save();
-
             MessageBox.Show("Your settings have been saved successfully!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
@@ -94,6 +125,17 @@ namespace Console
                 default:
                     return "Status Changing";
             }
+        }
+
+
+        /// <summary>
+        /// Handles the domain record drop-down selection action.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbxUpdate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("A record ID:" + this.cbxUpdate.SelectedValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
         }
     }
 }

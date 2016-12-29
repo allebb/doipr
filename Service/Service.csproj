@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DOAPI.cs" />
     <Compile Include="IpMonitor.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Monitor.cs">

@@ -29,7 +29,7 @@ namespace DOIPR.Service.Properties
 
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("360000")]
         public int queryInterval
         {
             get
@@ -55,6 +55,7 @@ namespace DOIPR.Service.Properties
             {
                 this["currentAddress"] = value;
             }
+
         }
 
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
@@ -113,7 +114,7 @@ namespace DOIPR.Service.Properties
             }
             set
             {
-                recordId = value;
+                this["recordId"] = value;
             }
         }
 

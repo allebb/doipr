@@ -33,7 +33,7 @@
             this.txtToken = new System.Windows.Forms.TextBox();
             this.lblToken = new System.Windows.Forms.Label();
             this.lblARecordUpdate = new System.Windows.Forms.Label();
-            this.txtUpdate = new System.Windows.Forms.ComboBox();
+            this.cbxUpdate = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.lblDomain = new System.Windows.Forms.Label();
             this.txtDomain = new System.Windows.Forms.TextBox();
@@ -66,7 +66,7 @@
             this.gbxDigitalOcean.Controls.Add(this.txtToken);
             this.gbxDigitalOcean.Controls.Add(this.lblToken);
             this.gbxDigitalOcean.Controls.Add(this.lblARecordUpdate);
-            this.gbxDigitalOcean.Controls.Add(this.txtUpdate);
+            this.gbxDigitalOcean.Controls.Add(this.cbxUpdate);
             this.gbxDigitalOcean.Controls.Add(this.btnRetrieve);
             this.gbxDigitalOcean.Controls.Add(this.lblDomain);
             this.gbxDigitalOcean.Controls.Add(this.txtDomain);
@@ -102,13 +102,15 @@
             this.lblARecordUpdate.TabIndex = 4;
             this.lblARecordUpdate.Text = "Update:";
             // 
-            // txtUpdate
+            // cbxUpdate
             // 
-            this.txtUpdate.FormattingEnabled = true;
-            this.txtUpdate.Location = new System.Drawing.Point(58, 104);
-            this.txtUpdate.Name = "txtUpdate";
-            this.txtUpdate.Size = new System.Drawing.Size(124, 21);
-            this.txtUpdate.TabIndex = 3;
+            this.cbxUpdate.Enabled = false;
+            this.cbxUpdate.FormattingEnabled = true;
+            this.cbxUpdate.Location = new System.Drawing.Point(58, 104);
+            this.cbxUpdate.Name = "cbxUpdate";
+            this.cbxUpdate.Size = new System.Drawing.Size(124, 21);
+            this.cbxUpdate.TabIndex = 3;
+            this.cbxUpdate.SelectedIndexChanged += new System.EventHandler(this.cbxUpdate_SelectedIndexChanged);
             // 
             // btnRetrieve
             // 
@@ -265,7 +267,7 @@
         private System.Windows.Forms.TextBox txtToken;
         private System.Windows.Forms.Label lblToken;
         private System.Windows.Forms.Label lblARecordUpdate;
-        private System.Windows.Forms.ComboBox txtUpdate;
+        private System.Windows.Forms.ComboBox cbxUpdate;
         private System.Windows.Forms.TextBox txtLastUpdatedAt;
         private System.Windows.Forms.Label lblLastUpdateAt;
         private System.Windows.Forms.TextBox txtServiceStatus;
