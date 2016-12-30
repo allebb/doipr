@@ -41,7 +41,8 @@ namespace Console
         /// <param name="e"></param>
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            DOAPI api = new DOAPI(DOIPR.Service.Properties.Settings.Default.token);
+            DOAPI api = new DOAPI(ServiceSettings.config()["doToken"]);
+            //DOAPI api = new DOAPI(DOIPR.Service.Properties.Settings.Default.token);
             this.btnRetrieve.Enabled = false;
             this.btnRetrieve.Text = "Working...";
             this.btnRetrieve.Refresh();
@@ -63,7 +64,7 @@ namespace Console
                         continue;
                     this.cbxUpdate.Items.Add(record);
                 }
-                
+
             }
             catch (System.Net.WebException execption)
             {
@@ -81,12 +82,12 @@ namespace Console
         /// </summary>
         private void loadConsoleSettings()
         {
-            this.txtQueryInterval.Text = (DOIPR.Service.Properties.Settings.Default.queryInterval / 1000 / 60).ToString();
+            //this.txtQueryInterval.Text = (Convert.ToUInt32(ServiceSettings.config()["queryInterval"]) / 1000 / 60);
             //this.txtLastUpdatedAt.Text = DOIPR.Service.Properties.Settings.Default.queryLast.ToString();
             //this.txtServiceStatus.Text = this.getServiceStatus();
-            this.txtCurrentAddress.Text = DOIPR.Service.Properties.Settings.Default.currentAddress.ToString();
-            this.txtToken.Text = DOIPR.Service.Properties.Settings.Default.token.ToString();
-            this.txtDomain.Text = DOIPR.Service.Properties.Settings.Default.domain.ToString();
+            this.txtCurrentAddress.Text = ServiceSettings.config()["currentAddress"];
+            this.txtToken.Text = ServiceSettings.config()["doToken"];
+            this.txtDomain.Text = ServiceSettings.config()["doDomain"];
         }
 
         /// <summary>
@@ -94,10 +95,9 @@ namespace Console
         /// </summary>
         private void saveConsoleSettings()
         {
-            DOIPR.Service.Properties.Settings.Default.queryInterval = Convert.ToInt32(txtQueryInterval.Text);
-            DOIPR.Service.Properties.Settings.Default.token = this.txtToken.Text;
-            DOIPR.Service.Properties.Settings.Default.domain = this.txtDomain.Text;
-            DOIPR.Service.Properties.Settings.Default.Save();
+            ServiceSettings.set("queryInterval", txtQueryInterval.Text.ToString());
+            ServiceSettings.set("doToken", this.txtToken.Text);
+            ServiceSettings.set("doDomain", this.txtDomain.Text);
             MessageBox.Show("Your settings have been saved successfully!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
