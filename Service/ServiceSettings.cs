@@ -11,7 +11,7 @@ namespace DOIPR.Service
     public class ServiceSettings
     {
 
-        const string REGKEY = "SOFTWARE\\DOIPR";
+        const string REGKEY = @"SOFTWARE\DOIPR";
 
 
         /// <summary>
