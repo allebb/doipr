@@ -41,8 +41,7 @@ namespace Console
         /// <param name="e"></param>
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            DOAPI api = new DOAPI(ServiceSettings.config()["doToken"]);
-            //DOAPI api = new DOAPI(DOIPR.Service.Properties.Settings.Default.token);
+            DOAPI api = new DOAPI(this.txtToken.Text);
             this.btnRetrieve.Enabled = false;
             this.btnRetrieve.Text = "Working...";
             this.btnRetrieve.Refresh();
@@ -82,9 +81,8 @@ namespace Console
         /// </summary>
         private void loadConsoleSettings()
         {
-            //this.txtQueryInterval.Text = (Convert.ToUInt32(ServiceSettings.config()["queryInterval"]) / 1000 / 60);
-            //this.txtLastUpdatedAt.Text = DOIPR.Service.Properties.Settings.Default.queryLast.ToString();
-            //this.txtServiceStatus.Text = this.getServiceStatus();
+            this.txtQueryInterval.Text = ServiceSettings.config()["queryInterval"];
+            this.txtLastUpdatedAt.Text = ServiceSettings.config()["queryLast"];
             this.txtCurrentAddress.Text = ServiceSettings.config()["currentAddress"];
             this.txtToken.Text = ServiceSettings.config()["doToken"];
             this.txtDomain.Text = ServiceSettings.config()["doDomain"];
@@ -95,9 +93,22 @@ namespace Console
         /// </summary>
         private void saveConsoleSettings()
         {
-            ServiceSettings.set("queryInterval", txtQueryInterval.Text.ToString());
+
+            // Convert text to interger value and multiple 
+
+            ServiceSettings.set("queryInterval", txtQueryInterval.Text);
             ServiceSettings.set("doToken", this.txtToken.Text);
             ServiceSettings.set("doDomain", this.txtDomain.Text);
+
+            if (this.cbxUpdate.Enabled)
+            {
+                // Update the domain record name and ID.
+                ServiceSettings.set("doRecordName", this.cbxUpdate.SelectedItem.ToString());
+
+                // @todo - Get the record ID from the name.
+                ServiceSettings.set("doRecordId", "2");
+            }
+
             MessageBox.Show("Your settings have been saved successfully!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
