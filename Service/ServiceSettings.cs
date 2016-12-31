@@ -11,6 +11,9 @@ namespace DOIPR.Service
     public class ServiceSettings
     {
 
+        /// <summary>
+        /// The registry subkey to read/write the settings to/from.
+        /// </summary>
         const string REGKEY = @"SOFTWARE\DOIPR";
 
 

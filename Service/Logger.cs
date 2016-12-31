@@ -21,13 +21,11 @@ namespace DOIPR.Service
         /// </summary>
         /// <param name="eventType"></param>
         /// <param name="message"></param>
-        public static void PushMessage(string eventType, string message)
+        public static void PushMessage(EventLogEntryType eventType, string message)
         {
             if (!EventLog.SourceExists(source))
                 EventLog.CreateEventSource(source, log);
-
-            EventLog.WriteEntry(source, message, EventLogEntryType.Information);
-            //EventLog.WriteEntry(source, message, EventLogEntryType.Warning, 234);
+            EventLog.WriteEntry(source, message, eventType);
         }
     }
 }

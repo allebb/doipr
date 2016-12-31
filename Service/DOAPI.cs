@@ -35,16 +35,7 @@ namespace DOIPR.Service
 
                 string json = webClient.DownloadString(string.Format(recordsEndpoint, domain));
 
-                //System.IO.File.WriteAllText(@"C:\Users\Public\DigitalOceanOutput.txt", json);
-
                 DomainRecords records = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<DomainRecords>(json);
-
-                //foreach (Record record in records.domain_records)
-                //{
-                //    string lineData = string.Format("ID: {0}, Record name: {1} and is a type of {2}.", record.id, record.name, record.type);
-                //    System.IO.File.AppendAllText(@"C:\Users\Public\DigitalOceanOutput.txt", lineData);
-                //}
-
                 return records;
             }
 
