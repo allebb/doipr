@@ -92,7 +92,7 @@ namespace DOIPR.Service
             // Update and trigger a DO API request if the address has since changed.
             if (!this.publicAddress.compare(ServiceSettings.config()["currentAddress"]))
             {
-                Logger.PushMessage("Test", "New IP address detected (" + publicAddress.get() + "), updating the DigitalOcean API.");
+                Logger.PushMessage(EventLogEntryType.Information, "New IP address detected (" + publicAddress.get() + "), updating the DigitalOcean API.");
 
                 // Invoke an DigitalOcean DNS Update.
                 this.pushIpUpdateToDigitalOcean(this.lastAddress);
@@ -107,7 +107,7 @@ namespace DOIPR.Service
         {
             if (!true)
             {
-                Logger.PushMessage("Test", "Unable to update DigitalOcean API - Check your API credentials and try again!");
+                Logger.PushMessage(EventLogEntryType.Error, "Unable to update DigitalOcean API - Check your API credentials and try again!");
                 return;
             }
             ServiceSettings.set("currentAddress", ipAddress);
