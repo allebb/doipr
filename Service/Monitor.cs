@@ -71,6 +71,7 @@ namespace DOIPR.Service
         private void monitor()
         {
             this.process();
+            this.updateLastQueryDateTime();
             Thread.Sleep(this.retrieveQueryInterval());
         }
 
@@ -88,8 +89,6 @@ namespace DOIPR.Service
 
             // Resolve the current public IP address.
             this.publicAddress.detect();
-
-
 
             // Update and trigger a DO API request if the address has since changed.
             if (!this.publicAddress.compare(ServiceSettings.config()["currentAddress"]))
@@ -111,7 +110,7 @@ namespace DOIPR.Service
             {
                 Logger.PushMessage(EventLogEntryType.Error, "Unable to update DigitalOcean API - Check your API credentials and try again!");
                 return;
-            }        
+            }
             ServiceSettings.set("currentAddress", ipAddress);
             this.lastAddress = ipAddress;
         }
@@ -124,6 +123,14 @@ namespace DOIPR.Service
         {
             int queryInterval = Convert.ToInt16(ServiceSettings.config()["queryInterval"]) * 1000 * 60;
             return queryInterval; 
+        }
+
+        /// <summary>
+        /// Updates the last query date and time.
+        /// </summary>
+        protected void updateLastQueryDateTime()
+        {
+            ServiceSettings.set("queryLast", string.Format("{0} {1} UTC", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString()));
         }
 
     }

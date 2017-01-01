@@ -105,6 +105,9 @@ namespace Console
                 // Update the domain record name and ID.
                 ServiceSettings.set("doRecordName", this.cbxUpdate.SelectedItem.ToString());
 
+                // Lookup the Record ID.
+                
+
                 // @todo - Get the record ID from the name.
                 ServiceSettings.set("doRecordId", "7843632");
             }
@@ -146,7 +149,7 @@ namespace Console
         /// <param name="e"></param>
         private void cbxUpdate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("A record ID:" + this.cbxUpdate.SelectedValue, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            
         }
     }
 }
